@@ -9,7 +9,7 @@ public class Alfred {
   static var appBundlePath: URL?
     // Check if appBundlePath contains  a value, otherwise set it using the current process
     // https://cocoacasts.com/value-of-optional-type-url-must-be-unwrapped-to-a-value-of-type-url
-    if let appBundlePath {
+    if var appBundlePath {
       if fs.fileExists(atPath: "/Applications/Alfred 5.app") {
         appBundlePath = URL(fileURLWithPath: "/Applications/Alfred 5.app")
       } else {
