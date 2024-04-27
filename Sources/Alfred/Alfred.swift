@@ -7,10 +7,16 @@ public class Alfred {
   // Declare type prop as optional via '?' to allow for later reassignment
   // https://stackoverflow.com/questions/36557858/swift-how-to-declare-a-static-member-variable-which-is-a-class
   static var appBundlePath: URL?
-    if fs.fileExists(atPath: "/Applications/Alfred 5.app") {
-      appBundlePath = URL(fileURLWithPath: "/Applications/Alfred 5.app")
+    // Check if appBundlePath contains  a value, otherwise set it using the current process
+    // https://cocoacasts.com/value-of-optional-type-url-must-be-unwrapped-to-a-value-of-type-url
+    if let appBundlePath {
+      if fs.fileExists(atPath: "/Applications/Alfred 5.app") {
+        appBundlePath = URL(fileURLWithPath: "/Applications/Alfred 5.app")
+      } else {
+        appBundlePath = URL(fileURLWithPath: "/Applications/Alfred 4.app")
+      }
     } else {
-      appBundlePath = URL(fileURLWithPath: "/Applications/Alfred 4.app")
+      print("Invalid app bundle path")
     }
 
   private static let alfredPlist: Plist =
