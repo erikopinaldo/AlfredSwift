@@ -4,7 +4,9 @@ public class Alfred {
   private static let fs: FileManager = FileManager.default
   private static let home: URL = fs.homeDirectoryForCurrentUser
 
-  static let appBundlePath: URL
+  // Declare type prop as optional via '?' to allow for later reassignment
+  // https://stackoverflow.com/questions/36557858/swift-how-to-declare-a-static-member-variable-which-is-a-class
+  static let appBundlePath: URL?
     if fs.fileExists(atPath: "/Applications/Alfred 5.app") {
       appBundlePath = URL(fileURLWithPath: "/Applications/Alfred 5.app")
     } else {
