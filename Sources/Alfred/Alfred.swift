@@ -4,19 +4,11 @@ public class Alfred {
   private static let fs: FileManager = FileManager.default
   private static let home: URL = fs.homeDirectoryForCurrentUser
 
-  // Declare type prop as optional via '?' to allow for later reassignment
-  // https://stackoverflow.com/questions/36557858/swift-how-to-declare-a-static-member-variable-which-is-a-class
-  static var appBundlePath: URL?
-    // Check if appBundlePath contains  a value, otherwise set it using the current process
-    // https://cocoacasts.com/value-of-optional-type-url-must-be-unwrapped-to-a-value-of-type-url
-    if var appBundlePath {
-      if fs.fileExists(atPath: "/Applications/Alfred 5.app") {
-        appBundlePath = URL(fileURLWithPath: "/Applications/Alfred 5.app")
-      } else {
-        appBundlePath = URL(fileURLWithPath: "/Applications/Alfred 4.app")
-      }
+  static let appBundlePath: URL =
+    if fs.fileExists(atPath: "/Applications/Alfred 5.app") {
+      URL(fileURLWithPath: "/Applications/Alfred 5.app")
     } else {
-      print("Invalid app bundle path")
+      URL(fileURLWithPath: "/Applications/Alfred 4.app")
     }
 
   private static let alfredPlist: Plist =
